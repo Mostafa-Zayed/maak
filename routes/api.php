@@ -62,3 +62,4 @@ Route::group(['middleware'=>['auth:sanctum','is-active']],function () {
     Route::post('send-message/{room}',                    [ChatController::class,        'sendMessage']);
     Route::post('upload-room-file/{room}',                [ChatController::class,        'uploadRoomFile']);
 });
+

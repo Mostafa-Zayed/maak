@@ -3,30 +3,32 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Spatie\Translatable\HasTranslations;
 
-class Category extends BaseModel
+class Category extends Model
 {
     use HasTranslations;
     use HasFactory;
-    const IMAGEPATH = 'categories' ; 
+    const IMAGEPATH = 'categories' ;
 
     protected $fillable = ['name','parent_id' ,'image','slug','store'];
     public $translatable = ['name'];
-    
+
 
     public function childes(){
         return $this->hasMany(self::class,'parent_id');
     }
 
     public function parent(){
-         return $this->belongsTo(self::class,'parent_id');
+        return $this->belongsTo(self::class,'parent_id');
     }
 
 
     public function subChildes()
     {
-         return $this->childes()->with( 'subChildes' );
+        return $this->childes()->with( 'subChildes' );
     }
 
     public function subParents()
@@ -66,6 +68,14 @@ class Category extends BaseModel
         return $path ;
     }
 
+    /*
+     * relationships
+     */
+    public function services(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Service::class,'category_id','id');
+    }
+
 
     public function getFollowedCategoryAttribute()
     {
@@ -75,9 +85,4 @@ class Category extends BaseModel
             return __('admin.main_section');
         }
     }
-
-
-    
-
-
 }

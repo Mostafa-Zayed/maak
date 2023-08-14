@@ -156,6 +156,7 @@ return [
     "Send_user_notification"                                 => "ارسال اشعار للمستخدمين",
     "Send_email"                                             => "ارسال بريد الكتروني",
     "active"                                                 => "نشط",
+    'not_active'          => 'غير نشط',
     "password"                                               => "كلمة السر",
     "incorrect_password"                                     => "كلمة السر غير صحيحة",
     "email"                                                  => "البريد الالكتروني",
@@ -427,6 +428,22 @@ return [
     ""                                     => "",
     ""                                     => "",
     ""                                     => "",
+    
+    'service'                        => 'خدمة',
+    'services'                       => 'خدمات',
+    'add_service_page'               => 'صفحة اضافة خدمة',
+    'add_service'                    => 'اضافة خدمة',
+    'update_service_page'            => 'صفحة تحديث خدمة',
+    'update_service'                 => 'تحديث خدمة',
+    'show_service_page'              => 'صفحة عرض خدمة',
+    'delete_service'                 => 'حذف خدمة',
+    'delete_group_of_services'       => 'حذف مجموعة من خدمات',
+    'activation_status_select' => 'اختار حالة التفعيل',
+    'category_name' => 'اسم القسم',
+    'select_category' => 'اختار القسم',
+
+    
     #new_comand_translations_here
+                
     #!!!!!!!!!!!!!!!!!! don't delete the previous comment !!!!!!!!!!!!!!!!!
 ];

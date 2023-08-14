@@ -7,25 +7,25 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category2>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Service>
  */
-class CategoryFactory extends Factory
+class ServiceFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'name' => [
                 'en' => $this->faker->name,
-                'ar' => $this->faker->name
+                'ar' => Str::slug($this->faker->name)
             ],
             'slug' => Str::slug($this->faker->name),
-            'image' => 'default.png',
-            'parent_id' => rand(1,2)
+            'status' => rand(0,1),
+            'category_id' => Category::whereNotNull('parent_id')->get()->random()->id
         ];
     }
 }

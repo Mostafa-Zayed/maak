@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SmsTableSeeder::class);
         // $this->call(NotificationSeeder::class);
         $this->call(CategoryTableSeeder::class);
+        $this->call(ServiceTableSeeder::class);
         //    $this->call(SettlementTableSeeder::class);
     }
 }

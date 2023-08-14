@@ -1493,7 +1493,69 @@ Route::group(['as' => 'admin.'], function () {
       ]);
     /*------------ end Of Settlements ----------*/
 
+    
+    /*------------ start Of services ----------*/
+        Route::get('services', [
+            'uses'      => 'ServiceController@index',
+            'as'        => 'services.index',
+            'title'     => 'services',
+            'icon'      => '<i class="feather icon-image"></i>',
+            'type'      => 'parent',
+            'sub_route' => false,
+            'child'     => ['services.create', 'services.store','services.edit', 'services.update', 'services.show', 'services.delete'  ,'services.deleteAll' ,]
+        ]);
+
+        # services store
+        Route::get('services/create', [
+            'uses'  => 'ServiceController@create',
+            'as'    => 'services.create',
+            'title' => 'add_service_page'
+        ]);
+
+
+        # services store
+        Route::post('services/store', [
+            'uses'  => 'ServiceController@store',
+            'as'    => 'services.store',
+            'title' => 'add_service'
+        ]);
+
+        # services update
+        Route::get('services/{id}/edit', [
+            'uses'  => 'ServiceController@edit',
+            'as'    => 'services.edit',
+            'title' => 'update_service_page'
+        ]);
+
+        # services update
+        Route::put('services/{id}', [
+            'uses'  => 'ServiceController@update',
+            'as'    => 'services.update',
+            'title' => 'update_service'
+        ]);
+
+        # services show
+        Route::get('services/{id}/Show', [
+            'uses'  => 'ServiceController@show',
+            'as'    => 'services.show',
+            'title' => 'show_service_page'
+        ]);
+
+        # services delete
+        Route::delete('services/{id}', [
+            'uses'  => 'ServiceController@destroy',
+            'as'    => 'services.delete',
+            'title' => 'delete_service'
+        ]);
+        #delete all services
+        Route::post('delete-all-services', [
+            'uses'  => 'ServiceController@destroyAll',
+            'as'    => 'services.deleteAll',
+            'title' => 'delete_group_of_services'
+        ]);
+    /*------------ end Of services ----------*/
     #new_routes_here
+                     
   });
 
   Route::get('export/{export}', 'ExcelController@master')->name('master-export');

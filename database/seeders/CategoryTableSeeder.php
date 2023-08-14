@@ -17,7 +17,7 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        // Category::factory()->create(2);
+
         DB::table('categories')->insert([
             [
                 'name' => json_encode(['en' => 'Digital Services','ar' => 'خدمات رقمية'],JSON_UNESCAPED_UNICODE),
@@ -34,6 +34,9 @@ class CategoryTableSeeder extends Seeder
                 'store' => 1
             ]
         ]);
+
+
+        Category::factory(100)->create();
         // 1
         // DB::table('categories')->insert([
         //     [

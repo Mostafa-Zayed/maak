@@ -27,6 +27,8 @@ use App\Traits\UploadTrait;
                         if ($value != null ) {
                             $query->WhereDate('created_at' , '<=' , $value);
                         }
+                    }elseif($key == 'parent_id'){
+                        $query->where('parent_id','=',$value);
                     }else{
                         if ($value != null ) {
                             $query->Where($key, 'like', '%'.$value.'%');

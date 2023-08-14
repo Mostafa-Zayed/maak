@@ -1554,7 +1554,69 @@ Route::group(['as' => 'admin.'], function () {
             'title' => 'delete_group_of_services'
         ]);
     /*------------ end Of services ----------*/
+    
+    /*------------ start Of features ----------*/
+        Route::get('features', [
+            'uses'      => 'FeatureController@index',
+            'as'        => 'features.index',
+            'title'     => 'features',
+            'icon'      => '<i class="feather icon-image"></i>',
+            'type'      => 'parent',
+            'sub_route' => false,
+            'child'     => ['features.create', 'features.store','features.edit', 'features.update', 'features.show', 'features.delete'  ,'features.deleteAll' ,]
+        ]);
+
+        # features store
+        Route::get('features/create', [
+            'uses'  => 'FeatureController@create',
+            'as'    => 'features.create',
+            'title' => 'add_feature_page'
+        ]);
+
+
+        # features store
+        Route::post('features/store', [
+            'uses'  => 'FeatureController@store',
+            'as'    => 'features.store',
+            'title' => 'add_feature'
+        ]);
+
+        # features update
+        Route::get('features/{id}/edit', [
+            'uses'  => 'FeatureController@edit',
+            'as'    => 'features.edit',
+            'title' => 'update_feature_page'
+        ]);
+
+        # features update
+        Route::put('features/{id}', [
+            'uses'  => 'FeatureController@update',
+            'as'    => 'features.update',
+            'title' => 'update_feature'
+        ]);
+
+        # features show
+        Route::get('features/{id}/Show', [
+            'uses'  => 'FeatureController@show',
+            'as'    => 'features.show',
+            'title' => 'show_feature_page'
+        ]);
+
+        # features delete
+        Route::delete('features/{id}', [
+            'uses'  => 'FeatureController@destroy',
+            'as'    => 'features.delete',
+            'title' => 'delete_feature'
+        ]);
+        #delete all features
+        Route::post('delete-all-features', [
+            'uses'  => 'FeatureController@destroyAll',
+            'as'    => 'features.deleteAll',
+            'title' => 'delete_group_of_features'
+        ]);
+    /*------------ end Of features ----------*/
     #new_routes_here
+                     
                      
   });
 

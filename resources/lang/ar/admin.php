@@ -443,7 +443,20 @@ return [
     'select_category' => 'اختار القسم',
 
     
+    
+    'feature'                        => 'سمة',
+    'features'                       => 'سمات',
+    'add_feature_page'               => 'صفحة اضافة سمة',
+    'add_feature'                    => 'اضافة سمة',
+    'update_feature_page'            => 'صفحة تحديث سمة',
+    'update_feature'                 => 'تحديث سمة',
+    'show_feature_page'              => 'صفحة عرض سمة',
+    'delete_feature'                 => 'حذف سمة',
+    'delete_group_of_features'       => 'حذف مجموعة من سمات',
+
+    
     #new_comand_translations_here
+                
                 
     #!!!!!!!!!!!!!!!!!! don't delete the previous comment !!!!!!!!!!!!!!!!!
 ];

@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Translatable\HasTranslations;
 
 class Category extends BaseModel
 {
     use HasTranslations;
-
+    use HasFactory;
     const IMAGEPATH = 'categories' ; 
 
-    protected $fillable = ['name','parent_id' ,'image'];
+    protected $fillable = ['name','parent_id' ,'image','slug','store'];
     public $translatable = ['name'];
     
 

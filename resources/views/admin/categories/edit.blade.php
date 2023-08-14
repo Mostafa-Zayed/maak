@@ -53,21 +53,21 @@
                                             </div>
                                         @endforeach 
                                     </div>
-                                    
+
+                                    @if(! empty($category->parent_id))
                                     <div class="col-md-12 col-12">
                                         <div class="form-group">
                                             <label for="first-name-column">{{__('admin.select_main_section')}}</label>
                                             <div class="controls">
                                                 <select name="parent_id" class="select2 form-control" >
-                                                    <option value>{{__('admin.select_section')}}</option>
-                                                    @foreach ($categories as $category)
-                                                        <option {{$category->id == $category->parent_id ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>
+                                                    @foreach ($categories as $category2)
+                                                        <option {{$category2->id == $category->parent_id ? 'selected' : ''}} value="{{$category2->id}}">{{$category2->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-
+                                    @endif
                                     <div class="col-12 d-flex justify-content-center mt-3">
                                         <button type="submit" class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.update')}}</button>
                                         <a href="{{ url()->previous() }}" type="reset" class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>

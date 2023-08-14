@@ -18,6 +18,8 @@ class CreateCategoriesTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('image')->nullable();
+            $table->tinyInteger('store')->default(false);
+            $table->boolean('status')->default(true);
             $table->timestamps();
             $table->softDeletes();
 

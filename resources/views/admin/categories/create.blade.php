@@ -48,27 +48,19 @@
                                     @endforeach
 
 
-                                    @if ($id == null)
+
                                         <div class="col-md-12 col-12">
                                             <div class="form-group">
                                                 <label for="first-name-column">{{__('admin.select_main_section')}}</label>
                                                 <div class="controls">
-                                                    <select name="parent_id" class="select2 form-control" >
-                                                        <option value>{{__('admin.select_as_main_section')}}</option>
+                                                    <select name="parent_id" class="select2 form-control" required data-validation-required-message="{{__('admin.this_field_is_required')}}">
                                                         @foreach ($categories as $category)
                                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div> 
-                                    @else
-                                        <input type="hidden" name="parent_id" value="{{$id}}">
-                                    @endif
-
-                                    
-
-
+                                        </div>
 
                                     <div class="col-12 d-flex justify-content-center mt-3">
                                         <button type="submit" class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.add')}}</button>

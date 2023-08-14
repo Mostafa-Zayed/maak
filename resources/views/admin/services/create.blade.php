@@ -22,7 +22,7 @@
                             @csrf
                             <div class="form-body">
                                 <div class="row">
-                                            @foreach (languages() as $lang)
+                                    @foreach (languages() as $lang)
                                         <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="first-name-column">{{__('site.name_'.$lang)}}</label>

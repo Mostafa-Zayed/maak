@@ -14,6 +14,7 @@
                         <form  class="show form-horizontal" >
                             <div class="form-body">
                                 <div class="row">
+                                    @foreach (languages() as $lang)
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="first-name-column">{{__('admin.name')}}</label>
@@ -25,6 +26,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="first-name-column">{{__('admin.category_name')}}</label>
@@ -35,7 +37,9 @@
                                                        data-validation-required-message="{{__('admin.this_field_is_required')}}">
                                             </div>
                                         </div>
+
                                     </div>
+
                                     <div class="col-md-12 col-12">
                                         <div class="form-group">
                                             <label for="first-name-column">{{ __('admin.activation') }}</label>

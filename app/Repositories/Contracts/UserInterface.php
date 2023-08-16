@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Contracts;
 
-interface UserInterface
+use App\Contracts\AuthInterface;
+
+interface UserInterface extends AuthInterface
 {
-    
+    public function verifyAccount(& $user);
 }

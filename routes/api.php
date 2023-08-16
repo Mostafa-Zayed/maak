@@ -7,8 +7,21 @@ use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\SettlementController;
 
 Route::group(['middleware'=>['guest:sanctum']],function(){
+
+    Route::group(['prefix' => 'user'],function(){
+
+        Route::post('register',[App\Http\Controllers\Api\User\AuthController::class,'register'])->name('api.user-register');
+        Route::post('login',[App\Http\Controllers\Api\User\AuthController::class,'login'])->name('api.user-login');
+        Route::post('code/verify',[App\Http\Controllers\Api\User\AuthController::class,'verifyCode'])->name('api.user.verify-code');
+        // waiting fo analysis
+//        Route::post('password/update',[App\Http\Controllers\Api\User\AuthController::class,'updatePassword'])->name('api.user-password-update');
+
+    });
+    Route::get('test',[AuthController::class,'test']);
+
     Route::post('sign-up'                                 ,[AuthController::class,       'register']);
     Route::patch('activate'                               ,[AuthController::class,       'activate']);
+
     Route::get('resend-code'                              ,[AuthController::class,       'resendCode']);
     Route::post('sign-in'                                 ,[AuthController::class,       'login']);
     Route::post('forget-password-send-code'               ,[AuthController::class,       'forgetPasswordSendCode']);
@@ -16,6 +29,16 @@ Route::group(['middleware'=>['guest:sanctum']],function(){
     Route::post('reset-password'                          ,[AuthController::class,       'resetPassword']);
 });
 
+
+Route::group(['middleware' =>['auth:sanctum','is-active'],'prefix' => 'user'],function(){
+
+    Route::post('update/profile',[App\Http\Controllers\Api\User\AuthController::class,'updateProfile'])->name('api.user-update-profile');
+    Route::post('code/resend',[App\Http\Controllers\Api\User\AuthController::class,'resendCode'])->name('api.user-code-resend');
+    Route::post('phone/change/send/code',[App\Http\Controllers\Api\User\AuthController::class,'changePhoneSendCode'])->name('api.user-phone-change-send-code');
+    Route::post('phone/check/send/code',[App\Http\Controllers\Api\User\AuthController::class,'changePhoneCheckCode'])->name('api.user-phone-check-code');
+    Route::post('logout',[App\Http\Controllers\Api\User\AuthController::class,'logout'])->name('api.user-logout');
+    Route::post('settings',[App\Http\Controllers\Api\User\SettingController::class,'updateSettings'])->name('api.user-settings-update');
+});
 Route::group(['middleware'=>['OptionalSanctumMiddleware']],function(){
     Route::get('about',                                   [SettingController::class,     'about']);
     Route::get('terms',                                   [SettingController::class,     'terms']);

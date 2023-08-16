@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
     protected $namespace = 'App\Http\Controllers';
-    protected $adminNamespace = 'App\Http\Controllers\Admin';
-    protected $siteNamespace  = 'App\Http\Controllers\Site';
-    protected $apiNamespace  = 'App\Http\Controllers\Api';
+    protected string $adminNamespace = 'App\Http\Controllers\Admin';
+    protected string $siteNamespace  = 'App\Http\Controllers\Site';
+    protected string $apiNamespace  = 'App\Http\Controllers\Api';
 
     public const HOME = '/home';
     public function boot()
@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
+        Route::prefix('api/v1/')
             ->middleware(['api', 'api-cors', 'api-lang'])
             ->namespace($this->apiNamespace)
             ->group(base_path('routes/api.php'));

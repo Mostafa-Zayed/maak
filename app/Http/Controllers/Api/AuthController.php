@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api;
 use App\Models\UserUpdate;
+use App\Repositories\Contracts\AuthInterface;
 use Illuminate\Http\Request;
 use App\Traits\ResponseTrait;
 use App\Services\auth\AuthService;
@@ -20,11 +21,26 @@ use App\Http\Requests\Api\Auth\forgetPasswordSendCodeRequest;
 use App\Http\Requests\Api\Auth\forgetPasswordCheckCodeRequest;
 use App\Http\Resources\Api\Notifications\NotificationsCollection;
 
-class AuthController extends Controller {
-
+class AuthController extends Controller
+{
     use ResponseTrait ;
+    private AuthInterface $authRepository;
 
-    public function register(RegisterRequest $request) {
+    public function __construct(AuthInterface $authInterface)
+    {
+        $this->authRepository = $authInterface;
+    }
+
+    public function test()
+    {
+        dd($this->authRepository->register());
+    }
+
+
+    public function register(Request $request)
+    {
+        return $this->authRepository->register($request->all());
+        $this->authRepository->
         $data = (new AuthService())->register($request->validated());
         return $this->response( $data['key'] ,$data['msg'] , $data['user'] == [] ? [] :  new UserResource($data['user']) );
     }

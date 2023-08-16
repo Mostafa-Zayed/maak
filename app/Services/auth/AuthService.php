@@ -2,10 +2,10 @@
 
 namespace App\Services\auth;
 
-use DB;
 use App\Models\User;
 use App\Models\UserUpdate;
 use App\Traits\GeneralTrait;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService
@@ -93,7 +93,7 @@ class AuthService
             'code' => '',
         ])->refresh();
         auth()->user()->sendCodeAtSms($update->code, $update->full_phone);
-        return 
+//        return
         return $this->successMsg(__('apis.success'));
     }
 

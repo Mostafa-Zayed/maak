@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Traits\SmsTrait;
 use App\Traits\UploadTrait;
 use App\Services\Sms\SmsService;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Sanctum\HasApiTokens;
 use App\Http\Resources\Api\UserResource;
 use Illuminate\Notifications\Notifiable;
@@ -20,39 +21,22 @@ class User extends Authenticatable
 {
 
     use Notifiable, UploadTrait, HasApiTokens, SmsTrait  , SoftDeletes;
-
+    use HasFactory;
     protected $hidden = [
-        'password',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     protected $casts = [
-        'lat'         => 'decimal:8',
-        'lng'         => 'decimal:8',
+
         'is_notify'   => 'boolean',
         'is_blocked'  => 'boolean',
         'is_approved' => 'boolean',
         'active'      => 'boolean',
     ];
 
-    protected $fillable = [
-        'name',
-        'country_code',
-        'phone',
-        'email',
-        'password',
-        'image',
-        'active',
-        'is_blocked',
-        'is_approved',
-        'lang',
-        'is_notify',
-        'code',
-        'code_expire',
-        'lat',
-        'lng',
-        'map_desc',
-        'wallet_balance',
-    ];
+    protected $fillable = ['name','country_code','phone','email','image','active','is_blocked', 'lang','is_notify','code','code_expire', 'wallet_balance'];
 
     public function scopeSearch($query, $searchArray = [])
     {
@@ -185,10 +169,7 @@ class User extends Authenticatable
         return true;
     }
 
-    public function devices()
-    {
-        return $this->morphMany(Device::class, 'morph');
-    }
+
 
     public function login()
     {
@@ -246,6 +227,14 @@ class User extends Authenticatable
         static::deleted(function ($model) {
             $model->deleteFile($model->attributes['image'], 'users');
         });
+    }
+
+    /*
+     * relationships
+     */
+    public function devices(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(Device::class, 'morph');
     }
 
 }

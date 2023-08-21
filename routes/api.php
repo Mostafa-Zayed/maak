@@ -16,6 +16,13 @@ Route::group(['middleware'=>['guest:sanctum']],function(){
         // waiting fo analysis
 //        Route::post('password/update',[App\Http\Controllers\Api\User\AuthController::class,'updatePassword'])->name('api.user-password-update');
 
+        /*
+         * services
+         */
+        Route::get('services',[App\Http\Controllers\Api\User\HomeController::class,'services'])->name('api.user-services');
+        Route::get('category/{id}/services',[App\Http\Controllers\Api\User\HomeController::class,'getServicesByCategory'])->name('api.user-get-services-by-category');
+        Route::get('service/{id}/providers',[App\Http\Controllers\Api\User\HomeController::class,'getServiceProvider'])->name('api.user-get-service-providers');
+
     });
     Route::get('test',[AuthController::class,'test']);
 
@@ -54,6 +61,7 @@ Route::group(['middleware'=>['OptionalSanctumMiddleware']],function(){
     Route::get('country/{country_id}/cities',             [SettingController::class,     'CountryCities']);
     Route::post('check-coupon',                           [SettingController::class,     'checkCoupon']);
     Route::get('is-production',                           [SettingController::class,     'isProduction']);
+//    Route::get('user/services',[App\Http\Controllers\Api\User\HomeController::class,'services'])->name('api.user-services');
 });
 
 

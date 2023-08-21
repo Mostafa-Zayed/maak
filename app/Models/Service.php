@@ -22,6 +22,11 @@ class Service extends BaseModel
         return $this->belongsTo(Category::class,'category_id','id');
     }
 
+    public function providers()
+    {
+//        return $this->belongsToMany()
+    }
+
     /*
      * scopes
      */

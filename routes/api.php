@@ -14,6 +14,10 @@ Route::group(['middleware'=>['guest:sanctum']],function(){
     Route::post('forget-password-send-code'               ,[AuthController::class,       'forgetPasswordSendCode']);
     Route::post('forget-password-check-code'              ,[AuthController::class,       'forgetPasswordCheckCode']);
     Route::post('reset-password'                          ,[AuthController::class,       'resetPassword']);
+
+    Route::group(['prefix' => 'provider'],function(){
+       Route::post('register',[\App\Http\Controllers\Api\ProviderController::class,'register']);
+    });
 });
 
 Route::group(['middleware'=>['OptionalSanctumMiddleware']],function(){

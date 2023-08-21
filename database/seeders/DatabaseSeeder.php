@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(NotificationSeeder::class);
         $this->call(CategoryTableSeeder::class);
         $this->call(ServiceTableSeeder::class);
+        $this->call(ProviderSeeder::class);
         //    $this->call(SettlementTableSeeder::class);
     }
 }

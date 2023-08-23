@@ -76,6 +76,10 @@ class Category extends Model
         return $this->hasMany(Service::class,'category_id','id');
     }
 
+    public function providers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Provider::class,'category_id','id');
+    }
 
     public function getFollowedCategoryAttribute()
     {

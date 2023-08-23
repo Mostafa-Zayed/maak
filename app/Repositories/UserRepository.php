@@ -87,7 +87,7 @@ class UserRepository implements UserInterface
         return $this;
     }
 
-    public function logout($request)
+    public function logout($request): bool
     {
         return $request->bearerToken() ? Auth::guard('sanctum')->user()->logout() : false;
     }

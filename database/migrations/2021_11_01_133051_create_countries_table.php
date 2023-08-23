@@ -17,6 +17,7 @@ class CreateCountriesTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('key', 100)->default('+966');
+            $table->string('iso',10)->nullable();
             $table->timestamps();
         });
     }

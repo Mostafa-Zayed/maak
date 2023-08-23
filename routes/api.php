@@ -24,7 +24,11 @@ Route::group(['middleware'=>['guest:sanctum']],function(){
         Route::get('service/{id}/providers',[App\Http\Controllers\Api\User\HomeController::class,'getServiceProvider'])->name('api.user-get-service-providers');
 
     });
-    Route::get('test',[AuthController::class,'test']);
+
+    Route::group(['prefix' => 'provider'],function(){
+        Route::post('register',[App\Http\Controllers\Api\Provider\AuthController::class,'register'])->name('api.provider-register');
+        Route::post('login',[App\Http\Controllers\Api\Provider\AuthController::class,'login'])->name('api.provider-login');
+    });
 
     Route::post('sign-up'                                 ,[AuthController::class,       'register']);
     Route::patch('activate'                               ,[AuthController::class,       'activate']);
@@ -35,9 +39,9 @@ Route::group(['middleware'=>['guest:sanctum']],function(){
     Route::post('forget-password-check-code'              ,[AuthController::class,       'forgetPasswordCheckCode']);
     Route::post('reset-password'                          ,[AuthController::class,       'resetPassword']);
 
-    Route::group(['prefix' => 'provider'],function(){
-       Route::post('register',[\App\Http\Controllers\Api\ProviderController::class,'register']);
-    });
+//    Route::group(['prefix' => 'provider'],function(){
+//       Route::post('register',[\App\Http\Controllers\Api\ProviderController::class,'register']);
+//    });
 });
 
 
@@ -96,5 +100,20 @@ Route::group(['middleware'=>['auth:sanctum','is-active']],function () {
     Route::delete('delete-message-copy/{message}',        [ChatController::class,        'deleteMessageCopy']);
     Route::post('send-message/{room}',                    [ChatController::class,        'sendMessage']);
     Route::post('upload-room-file/{room}',                [ChatController::class,        'uploadRoomFile']);
+});
+
+Route::group(['prefix' => 'provider','middleware'=>['auth:sanctum','is-active']],function(){
+
+    // auth
+    Route::post('logout',[App\Http\Controllers\Api\Provider\AuthController::class,'logout'])->name('api.provider-logout');
+    Route::post('password/change/send-code',[App\Http\Controllers\Api\Provider\AuthController::class,'changePasswordSendCode'])->name('api.provider-password-change-send-code');
+    Route::post('password/change/verify-code',[App\Http\Controllers\Api\Provider\AuthController::class,'changePasswordVerifyCode'])->name('api.provider-password-change-verify-code');
+    Route::post('password/update',[App\Http\Controllers\Api\Provider\AuthController::class,'updatePassword'])->name('api.provider-password-update');
+    Route::post('profile',[App\Http\Controllers\Api\Provider\AuthController::class,'getProfile'])->name('api.provider-get-profile');
+
+    /*
+     * settings
+     */
+    Route::post('bank/account/update',[App\Http\Controllers\Api\Provider\AuthController::class,'updateBankInfo'])->name('api.provider-update-bank');
 });
 

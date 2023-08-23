@@ -2,12 +2,9 @@
 
 namespace App\Repositories\Contracts;
 
-interface ProviderInterface
-{
+use App\Contracts\AuthInterface;
 
-    public function register($request);
-    public function login();
-    public function verify();
-    public function logout();
+interface ProviderInterface extends AuthInterface
+{
 
 }

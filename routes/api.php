@@ -62,7 +62,7 @@ Route::group(['middleware'=>['OptionalSanctumMiddleware']],function(){
     Route::get('fqss',                                    [SettingController::class,     'fqss']);
     Route::get('socials',                                 [SettingController::class,     'socials']);
     Route::get('images',                                  [SettingController::class,     'images']);
-    Route::get('categories/{id?}',                        [SettingController::class,     'categories']);
+//    Route::get('categories/{id?}',                        [SettingController::class,     'categories']);
     Route::get('countries',                               [SettingController::class,     'countries']);
     Route::get('countries-with-cities',                   [SettingController::class,     'countriesWithCities']);
     Route::get('cities',                                  [SettingController::class,     'cities']);
@@ -70,6 +70,20 @@ Route::group(['middleware'=>['OptionalSanctumMiddleware']],function(){
     Route::post('check-coupon',                           [SettingController::class,     'checkCoupon']);
     Route::get('is-production',                           [SettingController::class,     'isProduction']);
 //    Route::get('user/services',[App\Http\Controllers\Api\User\HomeController::class,'services'])->name('api.user-services');
+
+    /*
+     * departments
+     */
+    Route::get('departments',[App\Http\Controllers\Api\DepartmentController::class,'index'])->name('api.departments');
+    Route::post('departments/show',[App\Http\Controllers\Api\DepartmentController::class,'show'])->name('api.departments.show');
+    Route::get('departments/services/categories',[App\Http\Controllers\Api\DepartmentController::class,'getServicesCategories'])->name('api.departments-services-categories');
+    Route::get('departments/store/categories',[App\Http\Controllers\Api\DepartmentController::class,'getStoreCategories'])->name('api.departments-store-categories');
+    Route::get('departments/{id}/categories',[App\Http\Controllers\Api\DepartmentController::class,'getAllCategories'])->name('api.departments-get-categories');
+
+    /*
+     * categories
+     */
+    Route::get('categories',[App\Http\Controllers\Api\CategoryController::class,'index'])->name('api.categories');
 });
 
 
@@ -115,5 +129,10 @@ Route::group(['prefix' => 'provider','middleware'=>['auth:sanctum','is-active']]
      * settings
      */
     Route::post('bank/account/update',[App\Http\Controllers\Api\Provider\AuthController::class,'updateBankInfo'])->name('api.provider-update-bank');
+
+    /*
+     * services
+     */
+    Route::get('services',[App\Http\Controllers\Api\Provider\ServiceController::class,'index'])->name('api.provider-get-services');
 });
 

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\RequestService;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -31,9 +32,15 @@ class DatabaseSeeder extends Seeder
         $this->call(CouponTableSeeder::class);
         $this->call(SmsTableSeeder::class);
         // $this->call(NotificationSeeder::class);
-        $this->call(CategoryTableSeeder::class);
+        $this->call(DepartmentSeeder::class);
+        $this->call(CategorySeeder::class);
+//        $this->call(CategoryTableSeeder::class);
         $this->call(ServiceTableSeeder::class);
+
         $this->call(ProviderSeeder::class);
+        $this->call(RequestServiceSeeder::class);
+        $this->call(OfferPriceSeeder::class);
+//        $this->call(RequestService::class);
         //    $this->call(SettlementTableSeeder::class);
     }
 }

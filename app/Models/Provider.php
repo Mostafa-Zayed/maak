@@ -50,10 +50,17 @@ class Provider extends Authenticatable
         return $this->belongsTo(Category::class,'category_id','id');
     }
 
+    public function offer_prices(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(OfferPrice::class,'provider_id','id');
+    }
+
     // setters
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
     }
+
+
 
 }

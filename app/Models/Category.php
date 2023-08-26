@@ -13,7 +13,7 @@ class Category extends Model
     use HasFactory;
     const IMAGEPATH = 'categories' ;
 
-    protected $fillable = ['name','parent_id' ,'image','slug','store'];
+    protected $fillable = ['name','parent_id' ,'image','slug','service','status','department_id'];
     public $translatable = ['name'];
 
 
@@ -88,5 +88,22 @@ class Category extends Model
         } else {
             return __('admin.main_section');
         }
+    }
+
+    /*
+     * scopes
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status','=',1);
+    }
+    public function scopeService($query)
+    {
+        return $query->where('service','=',1);
+    }
+
+    public function scopeStore($query)
+    {
+        return $query->where('service','=',0);
     }
 }

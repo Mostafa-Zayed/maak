@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('image')->nullable();
-            $table->tinyInteger('store')->default(false);
+            $table->tinyInteger('service')->default(true);
             $table->boolean('status')->default(true);
             $table->timestamps();
             $table->softDeletes();
@@ -26,11 +26,13 @@ class CreateCategoriesTable extends Migration
             /*
             foreign keys
             */
+            $table->unsignedBigInteger('department_id')->nullable();
             $table ->unsignedBigInteger('parent_id')->index()->nullable();
 
             /*
             relationship on db level
             */
+            $table->foreign('department_id')->references('id')->on('departments');
             $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
